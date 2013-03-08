@@ -9,7 +9,7 @@ GC.respond_to?(:copy_on_write_friendly=) and
 
 timeout 30
 listen "#{base_dir}/shared/tmp/10likes.socket"
-pid "#{base_dir}/current/tmp/pids/unicorn.pid"
+pid "#{base_dir}/shared/pids/unicorn.pid"
 stderr_path "#{base_dir}/shared/log/unicorn.stderr.log"
 stdout_path "#{base_dir}/shared/log/unicorn.stdout.log"
 
