@@ -85,6 +85,7 @@ GEM
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
     json (1.7.7)
+    kgio (2.8.0)
     mail (2.4.4)
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
@@ -134,6 +135,7 @@ GEM
       rake (>= 0.8.7)
       rdoc (~> 3.4)
       thor (>= 0.14.6, < 2.0)
+    raindrops (0.10.0)
     rake (10.0.3)
     rdoc (3.12.2)
       json (~> 1.4)
@@ -171,6 +173,10 @@ GEM
     unf (0.0.5)
       unf_ext
     unf_ext (0.0.5)
+    unicorn (4.6.2)
+      kgio (~> 2.6)
+      rack
+      raindrops (~> 0.7)
     webrobots (0.0.13)
     whenever (0.8.2)
       activesupport (>= 2.3.4)
@@ -198,4 +204,5 @@ DEPENDENCIES
   sass-rails (~> 3.2.3)
   thin
   uglifier (>= 1.0.3)
+  unicorn
   whenever
