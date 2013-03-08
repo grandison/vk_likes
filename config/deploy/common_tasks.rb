@@ -1,5 +1,7 @@
 require 'fileutils'
 
+_cset :asset_env, "RAILS_GROUPS=assets"
+
 namespace :deploy do
   task :start, :roles => :app, :except => { :no_release => true } do
     run "cd #{current_path} && RAILS_ENV=#{rails_env} #{try_sudo} bundle exec #{unicorn_binary} -c #{unicorn_config} -E #{rails_env} -D"
@@ -40,4 +42,4 @@ namespace :deploy do
 end
 
 after "deploy:restart", "delayed_job:restart"
-after 'deploy:finalize_update', 'deploy:customize'
+after 'deploy:finalize_update', 'deploy:customize', "deploy:assets:precompile"
