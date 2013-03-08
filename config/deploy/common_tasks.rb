@@ -18,12 +18,10 @@ namespace :deploy do
   end
 
   task :restart, :roles => :app, :except => { :no_release => true } do
-    #run "sudo monit unmonitor vemmabode_unicorn unicorn_worker_1 unicorn_worker_2 unicorn_worker_3 unicorn_worker_4"
     deploy.web.disable
     stop
     start
     deploy.web.enable
-    run "sudo monit -g background restart"
   end
 
   task :customize, :roles => :app do
