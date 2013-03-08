@@ -1,6 +1,7 @@
 set :stages, %w(production)
 
 require 'bundler/capistrano'
+require 'capistrano/maintenance'
 require 'capistrano/ext/multistage'
 require 'delayed/recipes'
 
