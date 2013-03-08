@@ -97,6 +97,7 @@ GEM
       webrobots (~> 0.0, >= 0.0.9)
     mime-types (1.21)
     multi_json (1.6.1)
+    mysql2 (0.3.11)
     net-http-digest_auth (1.2.1)
     net-http-persistent (2.8)
     net-scp (1.1.0)
@@ -108,7 +109,6 @@ GEM
       net-ssh (>= 2.6.5)
     nokogiri (1.5.6)
     ntlm-http (0.1.1)
-    pg (0.14.1)
     polyglot (0.3.3)
     rack (1.4.5)
     rack-cache (1.2)
@@ -188,8 +188,8 @@ DEPENDENCIES
   jquery-rails
   json
   mechanize
+  mysql2
   nokogiri
-  pg
   rails (= 3.2.11)
   rspec
   sass-rails (~> 3.2.3)
