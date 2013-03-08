@@ -1,4 +1,3 @@
-# encoding: UTF-8
 require 'yaml'
 require 'digest/md5'
 require 'net/http'
@@ -63,7 +62,7 @@ class Vkontakte
 
   def authorize
     page = @browser.post('http://login.vk.com/', {'email' => @login, 'pass' => @password, 'act' => 'login'})
-    if page.body =~ /Проверка безопасности/
+    if page.body =~ /security_check/
       hash = JSON.parse(page.body.match(/var params = {.+hash: '(.+)';/)[1])
       params = {:act => "security_check", :code => login.last(4), :to => '', :al_page => '3', :hash => hash}
       @browser.post("http://vk.com/login.php", params)
