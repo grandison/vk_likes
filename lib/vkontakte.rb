@@ -63,7 +63,7 @@ class Vkontakte
   def authorize
     @browser.post('http://login.vk.com/', {'email' => @login, 'pass' => @password, 'act' => 'login'})
     page = @browser.get("https://oauth.vk.com/authorize?client_id=3454314&scope=1048575&response_type=token")
-    url = page.body.match(/function approve\(\) {\n[ ]+location\.href = "(.+)";/)[1]
+    url = page.body.match(/location\.href = "(.+)"/)[1]
     page = @browser.get(url)
     params = CGI::parse(page.uri.to_s.split("#")[1])
     @user_id = params["user_id"].first

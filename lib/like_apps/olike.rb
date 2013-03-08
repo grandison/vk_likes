@@ -1,13 +1,22 @@
 class Olike
   def initialize(vkontakte)
     @browser = vkontakte.browser
+    @login = vkontakte.login
+    @password = vkontakte.password
     login
   end
 
   def login
-    page = @browser.get("https://oauth.vk.com/authorize?client_id=3419461&redirect_uri=http://undefied.ru/olikelogin.php&scope=friends,wall,offline&display=page")
-    url = page.body.match(/href='(.+)&/)[1]
-    @browser.get(url)
+    page = @browser.get("https://oauth.vk.com/authorize?client_id=3419482&redirect_uri=http://vk-mimimi.ru/olikelogin.php&scope=friends,wall,offline&display=page")
+    if (f = page.form_with(:id => "login_submit"))
+      f.email = @login
+      f.password = @password
+      page = f.submit
+    end
+    if page.uri.to_s =~ /vk\.com/
+      url = page.body.match(/location\.href = "(.+)"/)[1]
+      @browser.get(url)
+    end
   end
 
   def get_vk_object
