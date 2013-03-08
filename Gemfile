@@ -21,7 +21,7 @@ group :development, :test do
 end
 
 gem 'jquery-rails'
-gem 'pg'
+gem 'mysql2'
 gem 'thin'
 gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails', :git => 'git://github.com/anjlab/bootstrap-rails.git'
 gem 'antigate'
