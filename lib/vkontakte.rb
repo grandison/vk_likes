@@ -62,7 +62,7 @@ class Vkontakte
   private
 
   def authorize
-    @browser.post('http://login.vk.com/', {'email' => @login, 'pass' => @password, 'act' => 'login'})
+    page = @browser.post('http://login.vk.com/', {'email' => @login, 'pass' => @password, 'act' => 'login'})
     if page.body =~ /Проверка безопасности/
       hash = JSON.parse(page.body.match(/var params = {.+hash: '(.+)';/)[1])
       params = {:act => "security_check", :code => login.last(4), :to => '', :al_page => '3', :hash => hash}
