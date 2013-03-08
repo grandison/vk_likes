@@ -29,7 +29,7 @@ namespace :deploy do
   task :customize, :roles => :app do
     configs = %w(database.yml omniauth.yml)
     configs.each do |config|
-      run %Q(ln -sf #{shared_path}/#{config} #{latest_release}/config/#{config})
+      run %Q(ln -sf #{shared_path}/config/#{config} #{latest_release}/config/#{config})
     end
     run %Q(ln -sf #{shared_path}/uploads #{latest_release}/public/uploads)
   end
