@@ -1,3 +1,4 @@
+# encoding: UTF-8
 require 'yaml'
 require 'digest/md5'
 require 'net/http'
