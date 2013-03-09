@@ -31,6 +31,7 @@ class Account < ActiveRecord::Base
 
   def earn_likes
     reload
+    logger.debug("Start earning likes for #{login}")
     return false if earned_at && (earned_at > 1.day.ago)
     update_attribute(:earned_at, Time.now)
     olike = Olike.new(vkontakte)
