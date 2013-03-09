@@ -1,6 +1,8 @@
 class Olike
   def initialize(vkontakte)
-    @browser = vkontakte.browser
+    @browser = vkontakte.browser.clone
+    proxy = Proxy.new
+    @browser.set_proxy(proxy.host, proxy.port)
     @login = vkontakte.login
     @password = vkontakte.password
     login
@@ -13,13 +15,13 @@ class Olike
       f.password = @password
       page = f.submit
     end
-    if page.uri.to_s =~ /vk\.com/
-      url = page.body.match(/location\.href = "(.+)"/)[1]
-      @browser.get(url)
+    while url = page.body.match(/location\.href ?+= ?+["'](.+)["']/).try(:[], 1)
+      page = @browser.get(url)
     end
   end
 
   def get_vk_object
+    @browser.get("http://olike.ru")
     page = @browser.get("http://olike.ru/redirectlot.php")
     uri = page.uri.to_s
     match = uri.match(/http\:\/\/vk\.com\/(.+)/)

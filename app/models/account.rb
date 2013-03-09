@@ -34,10 +34,13 @@ class Account < ActiveRecord::Base
     poiskvs = PoiskVs.new(vkontakte)
     likemachine = LikeMachine.new(vkontakte)
 
-    i = 0
+    i,j = 0,0
     times = LikeApp::LIKES_IN_DAY
-    while (i < times) do
+    max_tries_count = 1000
+    while (i < times && j < max_tries_count) do
+      j += 1
       vk_object = olike.get_vk_object
+      p vk_object
       next unless vk_object
       vkontakte.like(vk_object)
       
