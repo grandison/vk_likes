@@ -18,3 +18,8 @@
 # end
 
 # Learn more: http://github.com/javan/whenever
+
+
+every 1.day do
+  runner "Account.earn_likes"
+end

@@ -23,6 +23,12 @@ class Account < ActiveRecord::Base
     end
   end
 
+  def self.earn_likes
+    Account.find_each do |u|
+      u.delay.earn_likes
+    end
+  end
+
   def earn_likes
     olike = Olike.new(vkontakte)
     poiskvs = PoiskVs.new(vkontakte)
