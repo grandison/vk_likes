@@ -2,7 +2,7 @@ class Proxy
   attr_accessor :host, :port
 
   def initialize
-    @host = "95.78.159.224"
-    @port = "3128"
+    @host = "159.255.160.23"
+    @port = "8080"
   end
 end

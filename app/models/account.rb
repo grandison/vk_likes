@@ -53,7 +53,7 @@ class Account < ActiveRecord::Base
       likemachine.earn_likes(vk_object)  
 
       i += 1
-      sleep(1)
+      sleep(5)
     end
     like_apps.each do |like_app|
       like_app.get_likes_count
