@@ -20,6 +20,6 @@
 # Learn more: http://github.com/javan/whenever
 
 
-every 1.day do
+every 1.hour do
   runner "Account.earn_likes"
 end
