@@ -30,6 +30,7 @@ class Account < ActiveRecord::Base
   end
 
   def earn_likes
+    reload
     return false if earned_at && (earned_at > 1.day.ago)
     update_attribute(:earned_at, Time.now)
     olike = Olike.new(vkontakte)
