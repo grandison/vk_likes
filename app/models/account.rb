@@ -5,6 +5,8 @@ class Account < ActiveRecord::Base
   validate :login_to_vk
   after_create :create_apps
 
+  scope :for_earn, where("earned_at < ?", 1.day.ago)
+
   def login_to_vk
     begin
       vkontakte
@@ -24,12 +26,13 @@ class Account < ActiveRecord::Base
   end
 
   def self.earn_likes
-    Account.find_each do |u|
+    Account.for_earn do |u|
       u.delay.earn_likes
     end
   end
 
   def earn_likes
+    update_attribute(:earned_at, Time.now)
     olike = Olike.new(vkontakte)
     poiskvs = PoiskVs.new(vkontakte)
     likemachine = LikeMachine.new(vkontakte)
