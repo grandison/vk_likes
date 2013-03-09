@@ -1,5 +1,3 @@
-require 'eventmachine'
-require 'em-http-request'
 require 'nokogiri'
 
 class PoiskVs
@@ -22,18 +20,7 @@ class PoiskVs
   end
 
   def earn_likes(vk_object)
-    EventMachine.run do
-      multi_request = EM::MultiRequest.new
-      10.times do |i|
-        request = EM::HttpRequest.new("
-          http://poiskvs.kartadruzey.ru/do_offer?entity=#{vk_object}&viewer_sex=m&viewer_id=#{@user_id}&auth_key=#{@auth_key}&client_id=190").post
-        multi_request.add("poiskvs#{i}", request)
-      end
-
-      multi_request.callback do
-        EventMachine.stop
-      end
-    end
+    @browser.post("http://poiskvs.kartadruzey.ru/do_offer?entity=#{vk_object}&viewer_sex=m&viewer_id=#{@user_id}&auth_key=#{@auth_key}&client_id=190")
   end
 
   def get_balance
