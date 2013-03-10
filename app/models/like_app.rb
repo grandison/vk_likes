@@ -11,7 +11,7 @@ class LikeApp < ActiveRecord::Base
   LIKES_IN_DAY = 300
 
   def self.get_likes_count
-    LikeApp.find_each do |like_app| 
+    find_each do |like_app| 
       like_app.delay.get_likes_count 
     end
   end
