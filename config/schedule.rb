@@ -20,7 +20,7 @@
 # Learn more: http://github.com/javan/whenever
 
 
-every 1.hour do
+every 10.minutes do
   runner "Account.earn_likes"
   runner "LikeApp.get_likes_count"
 end
