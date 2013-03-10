@@ -1,9 +1,11 @@
 class Account < ActiveRecord::Base
   attr_accessible :login, :password
-  has_many :like_apps
+  has_many :like_apps, :dependent => :destroy
 
   validate :login_to_vk
   after_create :create_apps
+
+  scope :sort_by_likes_count, joins(:like_apps).group("accounts.id").order("SUM(like_apps.likes_count) DESC")
 
   def login_to_vk
     begin
@@ -59,4 +61,26 @@ class Account < ActiveRecord::Base
       like_app.get_likes_count
     end
   end
+
+  def self.order_likes(url, likes_count)
+    ordered_likes_count = 0
+    while ordered_likes_count < likes_count
+      Account.sort_by_likes_count.each do |acc|
+        ordered_likes_count += acc.order_likes(url, likes_count - ordered_likes_count)
+        return ordered_likes_count if (ordered_likes_count >= likes_count) 
+      end
+    end
+    LikeApp.delay.get_likes_count
+    ordered_likes_count
+  end
+
+  def order_likes(url, likes_count)
+    ordered_likes_count = 0
+    like_apps.each do |like_app|
+      ordered_likes_count += like_app.order_likes(url, likes_count - ordered_likes_count)
+      return ordered_likes_count if (ordered_likes_count >= likes_count)
+    end
+    ordered_likes_count
+  end
+
 end

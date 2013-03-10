@@ -38,11 +38,13 @@ class Olike
   end
 
   def order_likes(link, count)
+    old_balance = get_balance
     page = @browser.get("http://olike.ru/buy_likes.php")
     page = page.form_with(:action => "") do |f|
       f.linkname = "LikeMe"
       f.linkpage = link
       f.budget = count
     end.submit
+    old_balance - get_balance
   end
 end

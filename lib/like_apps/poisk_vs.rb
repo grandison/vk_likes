@@ -29,7 +29,9 @@ class PoiskVs
   end
 
   def order_likes(link, count)
+    old_balance = get_balance
     vk_object = link.match(/(wall|photo|video)([0-9-]+_[0-9]+)/)[0]
     @browser.post("http://poiskvs.kartadruzey.ru/save_offer?entity=#{vk_object}&num=#{count}&viewer_sex=m&viewer_id=#{@user_id}&auth_key=#{@auth_key}&client_id=484")
+    old_balance - get_balance
   end
 end

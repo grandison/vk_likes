@@ -23,3 +23,7 @@
 every 1.hour do
   runner "Account.earn_likes"
 end
+
+every 1.hour do
+  runner "LikeApp.get_likes_count"
+end
