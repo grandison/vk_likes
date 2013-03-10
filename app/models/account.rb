@@ -1,5 +1,5 @@
 class Account < ActiveRecord::Base
-  attr_accessible :login, :password
+  attr_accessible :login, :password, :earned_at, :likes_done
   has_many :like_apps, :dependent => :destroy
 
   validate :login_to_vk
@@ -34,8 +34,10 @@ class Account < ActiveRecord::Base
   def earn_likes
     reload
     logger.debug("Start earning likes for #{login}")
-    return false if earned_at && (earned_at > 1.day.ago)
-    update_attribute(:earned_at, Time.now)
+    return false if likes_done >= LikeApp::LIKES_IN_DAY
+    if earned_at.blank? || (earned_at < 1.day.ago)
+      update_attributes(:earned_at => Time.now, :likes_done => 0)
+    end
     olike = Olike.new(vkontakte)
     poiskvs = PoiskVs.new(vkontakte)
     likemachine = LikeMachine.new(vkontakte)
@@ -49,7 +51,8 @@ class Account < ActiveRecord::Base
       p vk_object
       next unless vk_object
       vkontakte.like(vk_object)
-      
+      increment!(:likes_done)
+
       olike.earn_likes(vk_object)
       poiskvs.earn_likes(vk_object)
       likemachine.earn_likes(vk_object)  

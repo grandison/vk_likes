@@ -20,7 +20,10 @@ class PoiskVs
   end
 
   def earn_likes(vk_object)
-    @browser.post("http://poiskvs.kartadruzey.ru/do_offer?entity=#{vk_object}&viewer_sex=m&viewer_id=#{@user_id}&auth_key=#{@auth_key}&client_id=190")
+    begin
+      @browser.post("http://poiskvs.kartadruzey.ru/do_offer?entity=#{vk_object}&viewer_sex=m&viewer_id=#{@user_id}&auth_key=#{@auth_key}&client_id=190")
+    rescue Mechanize::ResponseCodeError
+    end
   end
 
   def get_balance
