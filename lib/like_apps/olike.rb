@@ -9,7 +9,8 @@ class Olike
   end
 
   def login
-    page = @browser.get("https://oauth.vk.com/authorize?client_id=3419482&redirect_uri=http://vk-mimimi.ru/olikelogin.php&scope=friends,wall,offline&display=page")
+    page = @browser.get("http://olike.ru")
+    page = page.forms[0].submit
     if (f = page.form_with(:id => "login_submit"))
       f.email = @login
       f.password = @password
