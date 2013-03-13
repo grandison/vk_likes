@@ -1,15 +1,15 @@
 set :application, "vk_likes"
 set :rails_env, "production"
 
-server "10likes.ru", :app, :web, :db, :primary => true
+server "5likes.ru", :app, :web, :db, :primary => true
 
-set :user, "10likes"
-set :domain, "10likes.ru"
+set :user, "5likes"
+set :domain, "5likes.ru"
 set :repository, "git@github.com:grandison/vk_likes.git"
 set :scm, "git"
 set :branch, "master"
 set :deploy_via, :remote_cache
-set :deploy_to, "/var/www/rails/10likes"
+set :deploy_to, "/var/www/rails/5likes"
 set :use_sudo, false
 
 set :unicorn_binary, "/usr/local/bin/unicorn_rails"
