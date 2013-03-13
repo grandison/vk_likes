@@ -1,14 +1,14 @@
 rails_env = ENV['RAILS_ENV'] || 'production'
 worker_processes 1
 
-base_dir = '/var/www/rails/10likes'
+base_dir = '/var/www/rails/5likes'
 
 preload_app true
 GC.respond_to?(:copy_on_write_friendly=) and
   GC.copy_on_write_friendly = true
 
 timeout 30
-listen "#{base_dir}/shared/tmp/10likes.socket"
+listen "#{base_dir}/shared/tmp/5likes.socket"
 pid "#{base_dir}/shared/pids/unicorn.pid"
 stderr_path "#{base_dir}/shared/log/unicorn.stderr.log"
 stdout_path "#{base_dir}/shared/log/unicorn.stdout.log"
