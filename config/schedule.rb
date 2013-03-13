@@ -21,7 +21,10 @@
 
 env :PATH, '/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin'
 
-every 1.hour do
+every 30.minutes do
   runner "Account.earn_likes"
+end
+
+every 10.minutes do
   runner "LikeApp.get_likes_count"
 end
