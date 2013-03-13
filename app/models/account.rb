@@ -34,10 +34,10 @@ class Account < ActiveRecord::Base
   def earn_likes
     reload
     logger.debug("Start earning likes for #{login}")
-    return false if likes_done >= LikeApp::LIKES_IN_DAY
     if earned_at.blank? || (earned_at < 1.day.ago)
       update_attributes(:earned_at => Time.now, :likes_done => 0)
     end
+    return false if likes_done >= LikeApp::LIKES_IN_DAY
     olike = Olike.new(vkontakte)
     poiskvs = PoiskVs.new(vkontakte)
     likemachine = LikeMachine.new(vkontakte)
