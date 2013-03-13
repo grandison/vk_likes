@@ -64,7 +64,7 @@ class Vkontakte
     page = @browser.post('http://login.vk.com/', {'email' => @login, 'pass' => @password, 'act' => 'login'})
     if page.body =~ /security_check/
       hash = page.body.match(/var params = {.+hash: '(.+)'\};/)[1]
-      params = {:act => "security_check", :code => login.last(4), :to => '', :al_page => '3', :hash => hash}
+      params = {:act => "security_check", :code => phone_number.last(4), :to => '', :al_page => '3', :hash => hash}
       @browser.post("http://vk.com/login.php", params)
     end
     page = @browser.get("https://oauth.vk.com/authorize?client_id=3454314&scope=1048575&response_type=token")

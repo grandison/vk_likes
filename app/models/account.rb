@@ -1,5 +1,5 @@
 class Account < ActiveRecord::Base
-  attr_accessible :login, :password, :earned_at, :likes_done
+  attr_accessible :login, :password, :earned_at, :likes_done, :phone_number
   has_many :like_apps, :dependent => :destroy
 
   validate :login_to_vk
