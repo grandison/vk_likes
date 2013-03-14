@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="demo-headline">
+    <h1 class="demo-logo">
+      <div class="logo"></div>
+      5likes
+      <small>Столько лайков, сколько хочешь!</small>
+    </h1>
+  </div>
+  <h1>Доступно <%= @likes_count %> <%= Russian::pluralize(@likes_count, "лайк", "лайки", "лайков") %>.</h1>
+  <div class="row">
+    <div class="span6 offset3">
+      <%= form_for @order, :class => "form-horizontal" do |f| %>
+        <%= f.text_field :vk_url, :placeholder => "Ссылка" %>
+        <%= f.text_field :likes_count, :placeholder => "Сколько лайков?" %>
+        <%= f.submit "Заказать", :class => "btn btn-large btn-primary btn-info" %>
+      <% end %>
+    </div>
+  </div>
+  
+</div>

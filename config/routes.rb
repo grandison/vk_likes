@@ -1,6 +1,6 @@
 VkontakteLikes::Application.routes.draw do
-  resources :likes, :only => [:index]
-  root :to => "likes#index"
+  resources :orders, :only => [:new,:create]
+  root :to => "orders#new"
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

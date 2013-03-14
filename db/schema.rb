@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130313041628) do
+ActiveRecord::Schema.define(:version => 20130314180425) do
 
   create_table "accounts", :force => true do |t|
     t.string   "login"
@@ -48,5 +48,12 @@ ActiveRecord::Schema.define(:version => 20130313041628) do
   end
 
   add_index "like_apps", ["account_id"], :name => "index_like_apps_on_account_id"
+
+  create_table "orders", :force => true do |t|
+    t.integer  "likes_count"
+    t.string   "vk_url"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
 end
