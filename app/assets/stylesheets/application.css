@@ -11,4 +11,10 @@
  *= require_self
  *= require_tree .
  *= require twitter/bootstrap
+ *= require flat-ui.css
  */
+
+
+h1 {
+  text-align: center;
+}
