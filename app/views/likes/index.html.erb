@@ -6,5 +6,5 @@
       <small>Столько лайков, сколько хочешь!</small>
     </h1>
   </div>
-  <h1>Доступно <%= @likes_count %> лайка.</h1>
+  <h1>Доступно <%= @likes_count %> <%= Russian::pluralize(@likes_count, "лайк", "лайки", "лайков") %>.</h1>
 </div>
