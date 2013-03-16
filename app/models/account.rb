@@ -16,7 +16,7 @@ class Account < ActiveRecord::Base
   end
 
   def vkontakte
-    @vkontakte ||= Vkontakte.new(login,password)
+    @vkontakte ||= Vkontakte.new(login,password,phone_number)
   end
 
   def create_apps
