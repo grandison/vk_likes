@@ -1,0 +1,7 @@
+<%= simple_form_for @feedback, :defaults => {:required => false} do |f| %>
+  <h1>Оставьте ваш отзыв</h1>
+  <%= f.input :name %>
+  <%= f.input :email, :as => :email %>
+  <%= f.input :text %>
+  <%= f.button :submit, :class => "btn btn-large btn-primary btn-info" %>
+<% end %>
