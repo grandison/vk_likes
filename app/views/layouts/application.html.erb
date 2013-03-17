@@ -7,6 +7,22 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <div class="navbar navbar-inverse">
+    <div class="navbar-inner">
+      <div class="container">
+        <div class="nav-collapse collapse">
+          <ul class="nav">
+            <li class="<%= current_page?(root_path) ? 'active' : '' %>">
+              <%= link_to "Заказать", root_path %>
+            </li>
+            <li class="<%= current_page?(new_feedback_path) ? 'active' : '' %>">
+              <%= link_to "Оставить отзыв", new_feedback_path %>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="container">
     <% if notice %>
       <p class="alert alert-success" style="text-align:center;"><%= notice %></p>
