@@ -5,20 +5,16 @@ class Olike
     @browser.set_proxy(proxy.host, proxy.port)
     @login = vkontakte.login
     @password = vkontakte.password
-    login
+    login(vkontakte)
   end
 
-  def login
-    page = @browser.get("http://olike.ru")
+  def login(vkontakte)
+    @browser.get("http://olike.ru")
+    page = @browser.post("http://olike.ru/reservelogin.php", {:vkk => "http://vk.com/#{vkontakte.username}"})
+    status = page.parser.css("big").first.text
+    vkontakte.set_status(status)
     page = page.forms[0].submit
-    if (f = page.form_with(:id => "login_submit"))
-      f.email = @login
-      f.password = @password
-      page = f.submit
-    end
-    while url = page.body.match(/location\.href ?+= ?+["'](.+)["']/).try(:[], 1)
-      page = @browser.get(url)
-    end
+    vkontakte.set_status("")
   end
 
   def get_vk_object

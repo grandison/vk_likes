@@ -44,7 +44,7 @@ class Account < ActiveRecord::Base
 
     50.times do
       vk_object = olike.get_vk_object
-      p vk_object
+      p "VkObject:" + vk_object.to_s
       next unless vk_object
       vkontakte.like(vk_object)
       increment!(:likes_done)

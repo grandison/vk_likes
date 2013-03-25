@@ -7,6 +7,8 @@ class Proxy
   def initialize
     @browser = Mechanize.new { |agent|
       agent.user_agent_alias = 'Mac Safari'
+      agent.open_timeout   = 5
+      agent.read_timeout   = 5
     }
     @browser.follow_meta_refresh = true
     doc          = Nokogiri.HTML(HTTParty.get("http://www.getproxy.jp/en/russia"))

@@ -7,7 +7,7 @@ require 'antigate'
 require 'cgi'
 
 class Vkontakte
-  attr_accessor :browser, :login, :password, :user_id, :access_token
+  attr_accessor :browser, :login, :password, :user_id, :access_token, :username
 
   def initialize(login, password, phone_number)
     @login = login
@@ -24,7 +24,6 @@ class Vkontakte
   def like(vk_object)
     like_params = self.class.parse_vk_object(vk_object)
     type,owner_id,item_id = like_params["type"], like_params["owner_id"], like_params["item_id"]
-    uri = URI.parse("https://api.vkontakte.ru/method/likes.add")
 
     args = {format: "JSON", type: type, owner_id: owner_id, item_id: item_id, access_token: @access_token}
     response = do_request("https://api.vkontakte.ru/method/likes.add", args)
@@ -59,6 +58,16 @@ class Vkontakte
     return {"type" => type, "owner_id" => owner_id, "item_id" => item_id}
   end
 
+  def set_status(status)
+    args = {:text => status, :access_token => @access_token}
+    response = do_request("https://api.vk.com/method/status.set", args)
+  end
+
+  def get_username
+    page = @browser.get("http://vk.com/settings")
+    page.parser.css("#settings_addr").first["value"]
+  end
+
   private
 
   def authorize
@@ -74,6 +83,7 @@ class Vkontakte
     params = CGI::parse(page.uri.to_s.split("#")[1])
     @user_id = params["user_id"].first
     @access_token = params["access_token"].first
+    @username = get_username
   end
 
 end

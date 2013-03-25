@@ -8,6 +8,7 @@ class PoiskVs
   end
 
   def authorize
+    @browser.get("http://vk.com")
     page = @browser.get("http://vk.com/poiskvs")
     params = JSON.parse(page.body.match(/var params = ({.+});/)[1])
     @auth_key = params["auth_key"]
