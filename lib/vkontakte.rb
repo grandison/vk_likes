@@ -79,7 +79,8 @@ class Vkontakte
     end
     page = @browser.get("https://oauth.vk.com/authorize?client_id=3454314&scope=1048575&response_type=token")
     
-    page.form_with(:id => "login_submit") do |form|
+    form = page.form_with(:id => "login_submit")
+    if form
       form.email = @login
       form.pass  = @password
       page = form.submit
