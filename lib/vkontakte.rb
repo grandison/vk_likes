@@ -78,8 +78,16 @@ class Vkontakte
       @browser.post("http://vk.com/login.php", params)
     end
     page = @browser.get("https://oauth.vk.com/authorize?client_id=3454314&scope=1048575&response_type=token")
+    
+    page.form_with(:id => "login_submit") do |form|
+      form.email = @login
+      form.pass  = @password
+      page = form.submit
+    end
+
     url = page.body.match(/location\.href = "(.+)"/)[1]
     page = @browser.get(url)
+
     params = CGI::parse(page.uri.to_s.split("#")[1])
     @user_id = params["user_id"].first
     @access_token = params["access_token"].first
